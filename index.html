@@ -8,69 +8,73 @@
         * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
             box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
             background: url('https://github.com/HIVE-Cloud/NORAH-Valentines/raw/main/IMG-20260211-WA0008.jpg') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            margin: 0;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             padding: 40px 30px;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            max-width: 550px;
+            border-radius: 50px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
             width: 100%;
             text-align: center;
-            border: 2px solid rgba(255, 120, 140, 0.5);
-        }
-
-        h1 {
-            color: #b21f2d;
-            font-size: 3rem;
-            margin-bottom: 10px;
+            border: 3px solid rgba(255, 77, 109, 0.3);
         }
 
         .heart {
             font-size: 5rem;
             color: #ff4d6d;
             animation: heartbeat 1.3s infinite;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #b21f2d;
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
 
         p {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: #2d1b1b;
             margin: 20px 0;
+            font-weight: 500;
         }
 
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             flex-wrap: wrap;
-            margin-top: 25px;
+            margin-top: 30px;
             position: relative;
             min-height: 100px;
         }
 
         .btn {
             border: none;
-            padding: 15px 45px;
+            padding: 15px 50px;
             border-radius: 60px;
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .yes {
@@ -95,17 +99,22 @@
             font-size: 1.4rem;
             color: #b21f2d;
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 30px;
             border: 2px dashed #ff4d6d;
+            width: 100%;
+        }
+
+        .video-container {
+            width: 100%;
+            margin-top: 20px;
         }
 
         video {
             width: 100%;
-            max-height: 300px;
+            max-height: 400px;
             border-radius: 20px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
         @keyframes heartbeat {
@@ -118,8 +127,8 @@
 <body>
     <div class="card">
         <div class="heart">❤️</div>
-        <h1>Dear Norah,</h1>
-        <p>Will you be my Valentine? 🌹</p>
+        <h1 id="greeting">Dear Norah,</h1>
+        <p id="question">Will you be my Valentine? 🌹</p>
 
         <div class="buttons" id="buttonArea">
             <button class="btn yes" id="yesBtn">Yes 💖</button>
@@ -134,7 +143,10 @@
         const yesBtn = document.getElementById('yesBtn');
         const messageDiv = document.getElementById('responseMessage');
         const buttonArea = document.getElementById('buttonArea');
+        const greeting = document.getElementById('greeting');
+        const question = document.getElementById('question');
 
+        // 🏃‍♀️ No button runs away
         noBtn.addEventListener('mouseover', function() {
             const x = Math.random() * (buttonArea.clientWidth - noBtn.clientWidth);
             const y = Math.random() * (buttonArea.clientHeight - noBtn.clientHeight);
@@ -144,6 +156,8 @@
             
             messageDiv.style.display = 'block';
             messageDiv.innerHTML = '😳 Saying no would just be shy… don’t you think, Norah? 💘';
+            messageDiv.style.background = 'white';
+            messageDiv.style.border = '2px dashed #ff4d6d';
         });
 
         noBtn.addEventListener('touchstart', function(e) {
@@ -156,27 +170,35 @@
             
             messageDiv.style.display = 'block';
             messageDiv.innerHTML = '😳 Saying no would just be shy… don’t you think, Norah? 💘';
+            messageDiv.style.background = 'white';
+            messageDiv.style.border = '2px dashed #ff4d6d';
         });
 
+        // ✅ Yes button shows video FULL SIZE
         yesBtn.addEventListener('click', function() {
-            document.querySelector('.buttons').style.display = 'none';
-            document.querySelector('p').style.display = 'none';
-            document.querySelector('h1').innerHTML = 'Yay! You said YES! ❤️ Norah';
+            // Hide buttons and question
+            buttonArea.style.display = 'none';
+            question.style.display = 'none';
+            greeting.innerHTML = 'Yay! You said YES! ❤️ Norah';
             
-            const videoHTML = `
-                <video controls autoplay loop>
-                    <source src="https://github.com/HIVE-Cloud/NORAH-Valentines/raw/main/VivaCut_video_1770806034928_HD.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <p style="margin-top: 20px; font-size: 1.3rem; color: #b21f2d;">
-                    This is the moment I knew. 💕
-                </p>
-            `;
+            // Show video in full width
             messageDiv.style.display = 'block';
-            messageDiv.innerHTML = videoHTML;
             messageDiv.style.background = 'transparent';
             messageDiv.style.border = 'none';
+            messageDiv.style.padding = '0';
+            
+            messageDiv.innerHTML = `
+                <div class="video-container">
+                    <video controls autoplay loop>
+                        <source src="https://github.com/HIVE-Cloud/NORAH-Valentines/raw/main/VivaCut_video_1770806034928_HD.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p style="margin-top: 20px; font-size: 1.5rem; color: #b21f2d; font-weight: bold; background: white; padding: 15px; border-radius: 50px;">
+                        This is the moment I knew. 💕
+                    </p>
+                </div>
+            `;
         });
     </script>
 </body>
-    </html>
+</html>
