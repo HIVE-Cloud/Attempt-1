@@ -135,7 +135,6 @@
         const messageDiv = document.getElementById('responseMessage');
         const buttonArea = document.getElementById('buttonArea');
 
-        // 🏃‍♀️ No button runs away
         noBtn.addEventListener('mouseover', function() {
             const x = Math.random() * (buttonArea.clientWidth - noBtn.clientWidth);
             const y = Math.random() * (buttonArea.clientHeight - noBtn.clientHeight);
@@ -159,7 +158,6 @@
             messageDiv.innerHTML = '😳 Saying no would just be shy… don’t you think, Norah? 💘';
         });
 
-        // ✅ Yes button shows video
         yesBtn.addEventListener('click', function() {
             document.querySelector('.buttons').style.display = 'none';
             document.querySelector('p').style.display = 'none';
@@ -181,43 +179,4 @@
         });
     </script>
 </body>
-</html>            animation: heartbeat 1.3s infinite;
-        }
-        p {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 20px 0;
-        }
-        .btn {
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 60px;
-            font-size: 1.5rem;
-            margin: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: #c9184a;
-            transform: scale(1.05);
-        }
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <div class="heart">❤️</div>
-        <h1>Dear Nora,</h1>
-        <p>Will you be my Valentine? 🌹</p>
-        <button class="btn" onclick="alert('Yesss! ❤️ You just made my whole year, Nora!')">Yes 💖</button>
-        <button class="btn" onclick="alert('Aww okay 😢 Still think you’re the sweetest ✨')">Maybe 😊</button>
-        <p style="margin-top: 30px;">Made with love, just for you 💌</p>
-    </div>
-</body>
-</html>
+    </html>
