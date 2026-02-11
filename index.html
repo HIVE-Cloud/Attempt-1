@@ -3,38 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Nora ❤️</title>
+    <title>For Norah ❤️</title>
     <style>
         * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
         }
+
         body {
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            background: url('https://github.com/HIVE-Cloud/NORAH-Valentines/raw/main/IMG-20260211-WA0008.jpg') no-repeat center center fixed;
+            background-size: cover;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 20px;
         }
+
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            max-width: 500px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(255, 120, 140, 0.5);
         }
+
         h1 {
-            color: #d62828;
+            color: #b21f2d;
             font-size: 3rem;
             margin-bottom: 10px;
         }
+
         .heart {
             font-size: 5rem;
             color: #ff4d6d;
             animation: heartbeat 1.3s infinite;
+        }
+
+        p {
+            font-size: 1.6rem;
+            color: #2d1b1b;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .btn {
+            border: none;
+            padding: 15px 45px;
+            border-radius: 60px;
+            font-size: 1.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .yes {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .yes:hover {
+            background: #c9184a;
+            transform: scale(1.1);
+        }
+
+        .no {
+            background: #ccc;
+            color: #444;
+            position: relative;
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #b21f2d;
+            background: white;
+            padding: 20px;
+            border-radius: 30px;
+            border: 2px dashed #ff4d6d;
+        }
+
+        video {
+            width: 100%;
+            max-height: 300px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="heart">❤️</div>
+        <h1>Dear Norah,</h1>
+        <p>Will you be my Valentine? 🌹</p>
+
+        <div class="buttons" id="buttonArea">
+            <button class="btn yes" id="yesBtn">Yes 💖</button>
+            <button class="btn no" id="noBtn">No 😅</button>
+        </div>
+
+        <div id="responseMessage" class="hidden-message"></div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const messageDiv = document.getElementById('responseMessage');
+        const buttonArea = document.getElementById('buttonArea');
+
+        // 🏃‍♀️ No button runs away
+        noBtn.addEventListener('mouseover', function() {
+            const x = Math.random() * (buttonArea.clientWidth - noBtn.clientWidth);
+            const y = Math.random() * (buttonArea.clientHeight - noBtn.clientHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = '😳 Saying no would just be shy… don’t you think, Norah? 💘';
+        });
+
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            const x = Math.random() * (buttonArea.clientWidth - noBtn.clientWidth);
+            const y = Math.random() * (buttonArea.clientHeight - noBtn.clientHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = '😳 Saying no would just be shy… don’t you think, Norah? 💘';
+        });
+
+        // ✅ Yes button shows video
+        yesBtn.addEventListener('click', function() {
+            document.querySelector('.buttons').style.display = 'none';
+            document.querySelector('p').style.display = 'none';
+            document.querySelector('h1').innerHTML = 'Yay! You said YES! ❤️ Norah';
+            
+            const videoHTML = `
+                <video controls autoplay loop>
+                    <source src="https://github.com/HIVE-Cloud/NORAH-Valentines/raw/main/VivaCut_video_1770806034928_HD.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p style="margin-top: 20px; font-size: 1.3rem; color: #b21f2d;">
+                    This is the moment I knew. 💕
+                </p>
+            `;
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = videoHTML;
+            messageDiv.style.background = 'transparent';
+            messageDiv.style.border = 'none';
+        });
+    </script>
+</body>
+</html>            animation: heartbeat 1.3s infinite;
         }
         p {
             font-size: 1.5rem;
